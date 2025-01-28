@@ -1,2 +1,17 @@
-<p>yo yo yo</p>
+<h2>Post</h2>
+<br><br> 
+
+<div class="post-area">
+    <input type="text" [(ngModel)]="titleValue"><br>
+    <textarea rows="10" cols="50" [(ngModel)]="enteredValue"></textarea>
+    <button (click)="onAddPost()">Post</button>
+</div>
+
+<div class="content">
+    {{ titlePost}} <br>
+    {{ newPost }}
+
+</div>
+    
+
 <router-outlet></router-outlet>

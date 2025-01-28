@@ -5,3 +5,20 @@
     border-bottom: 2px solid white;
     transition-duration: 0.3s;
 }
+h2 {
+    margin-left: 14%;
+}
+.post-area {
+    margin-left: 13%;
+    padding: 10px;
+}
+button {
+    padding: 10px;
+    font-family: 'Poppins';
+}
+textarea {
+    padding: 10px;
+}
+.content {
+    margin-left: 14%;
+}

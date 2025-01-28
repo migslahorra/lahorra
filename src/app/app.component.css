@@ -14,7 +14,7 @@
 }
 .navigation nav ul li a {
     text-decoration: none;
-    margin-right: 10px;
+    margin-right: 20px;
     padding: 10px;
     color: white;
 }
@@ -23,4 +23,7 @@
 }
 .active {
     border-bottom: 2px solid white;
+}
+.fa-upload, .fa-rss, .fa-message {
+    color: white;
 }
