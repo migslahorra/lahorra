@@ -1,4 +1,5 @@
-.navigation {
+@media only screen and (max-width: 1366px){ 
+    .navigation {
     background-color: lightslategrey;
     justify-content: space-around;
     align-items: center;
@@ -24,6 +25,5 @@
 .active {
     border-bottom: 2px solid white;
 }
-.fa-upload, .fa-rss, .fa-message {
-    color: white;
+
 }
