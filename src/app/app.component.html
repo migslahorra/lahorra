@@ -1,11 +1,5 @@
-<div class="navigation">
-    <h1>Post and Create!</h1>
-    <nav>
-        <ul>
-            <li><a routerLink="/post-create" routerLinkActive="active">Post</a></li>
-            <li><a routerLink="/feed" routerLinkActive="active">Feed</a></li>
-            <li><a routerLink="/messages" routerLinkActive="active">Messages</a></li>
-        </ul>
-    </nav>
-</div>
-<router-outlet></router-outlet>
+<app-header></app-header>
+<main>
+    <post-create></post-create>
+    <post-list></post-list>
+</main>

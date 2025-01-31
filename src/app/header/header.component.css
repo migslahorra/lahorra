@@ -1,0 +1,29 @@
+@media only screen and (max-width: 1366px){ 
+    .navigation {
+    background-color: lightslategrey;
+    justify-content: space-around;
+    align-items: center;
+    display: flex;
+    padding: 10px;
+}
+.navigation h1 {
+    color: white;
+}
+.navigation nav ul {
+    list-style-type: none;
+    display: flex;
+}
+.navigation nav ul li a {
+    text-decoration: none;
+    margin-right: 20px;
+    padding: 10px;
+    color: white;
+}
+.navigation nav ul li a:hover {
+    border-bottom: 2px solid white;
+}
+.active {
+    border-bottom: 2px solid white;
+}
+
+}
