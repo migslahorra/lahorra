@@ -1,16 +1,13 @@
-<h2>Post</h2>
-<br><br> 
-
-<div class="post-area">
-    <input type="text" [(ngModel)]="titleValue"><br>
-    <textarea rows="10" cols="50" [(ngModel)]="enteredValue"></textarea>
-    <button (click)="onAddPost()">Post</button>
-</div>
-
-<div class="content">
-    {{ titlePost}} <br>
-    {{ newPost }} <br>
-</div>
-    
-
-<router-outlet></router-outlet>
+<mat-card>
+    <form (submit)="onAddPost(postForm)" #postForm="ngForm">
+        <mat-form-field>
+            <input matInput type="text" name="title" ngModel required #title="ngModel" placeholder="title">
+            <mat-error *ngIf="title.invalid">Please enter a title</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <textarea rows="6" matInput name="content" ngModel required #content="ngModel" placeholder="content"></textarea>
+            <mat-error *ngIf="content.invalid">Please enter a content</mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Save</button>
+    </form>
+</mat-card>

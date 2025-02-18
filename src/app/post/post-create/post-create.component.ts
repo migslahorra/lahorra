@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { PostsService } from '../posts.service';
 
 @Component({
   selector: 'post-create',
@@ -6,14 +8,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./post-create.component.css'],
 })
 export class PostCreateComponent {
-  title = 'Post and Create';
-  newPost = 'Post Content';
-  titlePost = 'Title Conent';
-  titleValue = 'Enter Title';
-  enteredValue = 'Enter Description';
+  enteredContent = '';
+  enteredTitle = '';
 
-  onAddPost(){
-    this.titlePost = this.titleValue;
-    this.newPost = this.enteredValue;
+  constructor(public postsService: PostsService) {}
+  onAddPost(form: NgForm){
+    if (form.invalid) {
+      return;
+    }
+    this.postsService.addPost(form.value.title, form.value.content);
   }
 }
