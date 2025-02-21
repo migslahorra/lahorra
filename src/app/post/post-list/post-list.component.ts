@@ -13,6 +13,10 @@ export class PostListComponent {
     posts: Post[] = [];
     private postsSub!: Subscription;
 
+    // @Input() posts = [
+    //    {title: '1st title', content: '1st content'},
+    // ]
+    
     constructor (public postsService: PostsService) {
     }
     ngOnInit() {
