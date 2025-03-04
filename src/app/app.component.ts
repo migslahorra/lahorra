@@ -13,8 +13,13 @@ interface Post {
 
 export class AppComponent {
   title = 'Post and Create';
-  storedPosts: Post[] = [];
-  onPostAdded(post: any): void{
-    this.storedPosts.push(post);
-  }
+
+  // onPostAdded(post: any): void {
+  //  this.storedPosts.push(post);
+  //}
+  // storedPosts = [];
+  // onPostAdded(post){
+  // this.storedPosts.pust(post)
+  //}
+
 }

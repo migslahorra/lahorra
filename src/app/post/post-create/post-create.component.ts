@@ -8,8 +8,8 @@ import { PostsService } from '../posts.service';
   styleUrls: ['./post-create.component.css'],
 })
 export class PostCreateComponent {
-  enteredContent = '';
-  enteredTitle = '';
+//  enteredContent = '';
+//  enteredTitle = '';
 
   constructor(public postsService: PostsService) {}
   onAddPost(form: NgForm){
@@ -17,5 +17,6 @@ export class PostCreateComponent {
       return;
     }
     this.postsService.addPost(form.value.title, form.value.content);
-  }
+    form.resetForm();
+  };
 }

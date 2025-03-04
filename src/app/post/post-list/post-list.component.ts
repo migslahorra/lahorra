@@ -13,10 +13,14 @@ export class PostListComponent {
     posts: Post[] = [];
     private postsSub!: Subscription;
 
+    // @Input() posts = [
+    //    {title: '1st title', content: '1st content'},
+    // ]
+    
     constructor (public postsService: PostsService) {
     }
     ngOnInit() {
-      this.posts = this.postsService.getPosts();
+      this.postsService.getPosts();
       this.postsSub = this.postsService.getPostUpdateListener()
         .subscribe((posts: Post[]) => {
           this.posts = posts;
