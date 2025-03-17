@@ -22,25 +22,33 @@ textarea {
 .content {
     margin-left: 14%;
 }
-
 .post-form-card {
     max-width: 100px;
     margin: auto;
     padding: 20px;
 }
-
 .post-form {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
-
+.container {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+mat-card {
+    width: 400px;
+    padding: 20px;
+    text-align: center;
+    margin-left: 15%;
+    margin-top: 5%;
+}
 mat-form-field {
-    width: 50%;
+    width: 100%;
 }
-
 button {
-    align-self: flex-end;
+    display: block;
+    margin: 10px auto 0;
 }
-
-

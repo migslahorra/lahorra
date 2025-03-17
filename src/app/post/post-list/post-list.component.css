@@ -1,4 +1,30 @@
-.margintop {
-    width: 100%;
-    margin-top: 1rem;
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 5%;
+    height: 100vh;
+    position: absolute;
+}
+
+.post-form-container {
+    width: 40%;
+    margin-right: 5%;
+}
+
+.post-form-card {
+    width: 50%;
+    padding: 20px;
+}
+
+.post-list-container {
+    width: 55%;
+}
+
+mat-card {
+    position: absolute;
+    width: 40%;
+    padding: 20px;
+    top: 140px;
+    margin-left: 50%;
 }
