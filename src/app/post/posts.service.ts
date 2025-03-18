@@ -46,13 +46,13 @@ export class PostsService {
 
             const newPost: Post = { id: responseData.postId, title: title, content: content };
 
-            this.posts.push(newPost); // Use newPost with proper ID
+            this.posts.push(newPost);
             this.postsUpdated.next([...this.posts]);
         });
 }
 
 updatePost(id: string, title: string, content: string) {
-    const updatedPost = { title, content }; // Exclude id
+    const updatedPost = { title, content };
 
     this.http.put(`http://localhost:3000/api/posts/${id}`, updatedPost)
         .subscribe(response => {
