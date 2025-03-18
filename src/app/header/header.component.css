@@ -1,34 +1,13 @@
-.navigation {
-    background-color: lightslategrey;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px 20px;
-    padding: 20px;
-}
-.navigation h1 {
-    color: white;
-    font-family: 'Poppins', sans-serif;
+.spacer {
+    flex: 1 1 auto;
+  }
+  ul {
+    list-style: none;
     margin: 0;
-}
-.navigation nav {
-    display: flex;
-}
-.navigation nav ul {
-    list-style-type: none;
-    display: flex;
     padding: 0;
-    margin: 0;
-}
-.navigation nav ul li {
-    margin-right: 20px;
-}
-.navigation nav ul li a {
-    text-decoration: none;
-    padding: 10px;
-    color: white;
-}
-.navigation nav ul li a:hover,
-.navigation nav ul li a.routerLinkActive {
-    border-bottom: 2px solid white;
-}
+    display: flex;
+    gap: 10px;
+  }
+  li {
+    display: inline;
+  }

@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PostCreateComponent } from './post/post-create/post-create.component';
 import { FormsModule } from '@angular/forms';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';  
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -29,11 +30,12 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     BrowserAnimationsModule,
     MatInputModule,
+    MatProgressSpinnerModule,
     MatButtonModule,
     MatExpansionModule,
     MatToolbarModule,
     MatCardModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

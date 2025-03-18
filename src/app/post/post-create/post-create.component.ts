@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { PostsService } from '../posts.service';
 
 @Component({
@@ -8,15 +9,14 @@ import { PostsService } from '../posts.service';
   styleUrls: ['./post-create.component.css'],
 })
 export class PostCreateComponent {
-//  enteredContent = '';
-//  enteredTitle = '';
+  constructor(private postsService: PostsService, private router: Router) {}
 
-  constructor(public postsService: PostsService) {}
-  onAddPost(form: NgForm){
+  onAddPost(form: NgForm) {
     if (form.invalid) {
       return;
     }
     this.postsService.addPost(form.value.title, form.value.content);
     form.resetForm();
-  };
+    this.router.navigate(['/post-list']); // Redirect to post list after saving
+  }
 }

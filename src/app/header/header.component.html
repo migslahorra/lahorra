@@ -1,3 +1,10 @@
-<div class="navigation">
-    <h1>Post and Create!</h1>
-</div>
+<mat-toolbar color="primary">
+    <span>Post and Create!</span>
+    <span class="spacer"></span>
+    <nav>
+      <ul>
+        <li><a mat-button routerLink="/post-create" routerLinkActive="active">Add New Post</a></li>
+        <li><a mat-button routerLink="/post-list" routerLinkActive="active">Manage Posts List</a></li>
+      </ul>
+    </nav>
+  </mat-toolbar>
