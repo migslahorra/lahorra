@@ -43,7 +43,7 @@ mat-card {
     padding: 20px;
     text-align: center;
     margin-left: 35%;
-    margin-top: 5%;
+    margin-top: 3%;
 }
 mat-form-field {
     width: 100%;
@@ -52,3 +52,30 @@ button {
     display: block;
     margin: 10px auto 0;
 }
+input[type="file"] {
+    display: none;
+}
+.file-button {
+    background-color: rgb(123, 31, 162);
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+.file-button:hover {
+    background-color: rgb(156, 77, 204);
+}
+.image-preview {
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .image-preview img {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
