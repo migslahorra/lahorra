@@ -8,25 +8,35 @@ import { Observable, throwError } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class PostsService {
     private posts: Post[] = [];
-    private postsUpdated = new Subject<Post[]>();
+    private postsUpdated = new Subject<{ posts: Post[], postCount: number }>();
 
     constructor(private http: HttpClient) {}
 
-    getPosts() {
-        this.http.get<{ message: string; posts: any }>('http://localhost:3000/api/posts')
-            .pipe(map((postData) => {
-                return postData.posts.map((post: any) => ({
-                    id: post._id,
-                    title: post.title,
-                    content: post.content,
-                    imagePath: post.imagePath || ''
-                }));
-            }))
-            .subscribe((transformedPosts) => {
-                this.posts = transformedPosts;
-                this.postsUpdated.next([...this.posts]);
-            }, (error) => {
-                console.error("Error fetching posts:", error);
+    getPosts(pagesize: number, currentpage: number) {
+        const queryParams = `?pagesize=${pagesize}&currentpage=${currentpage}`;
+        this.http.get<{ message: string; posts: any; maxPosts: number }>('http://localhost:3000/api/posts' + queryParams)
+            .pipe(
+                map(postData => {
+                    return {
+                        posts: postData.posts.map((post: any) => {
+                            return {
+                                title: post.title,
+                                content: post.content,
+                                id: post._id,
+                                imagePath: post.imagePath
+                            };
+                        }),
+                        maxPosts: postData.maxPosts
+                    };
+                })
+            )
+            .subscribe((transformedPostsData) => {
+                this.posts = transformedPostsData.posts;
+                // Ensure that the next() method is called with the correct structure
+                this.postsUpdated.next({
+                    posts: [...this.posts], // Posts is the array
+                    postCount: transformedPostsData.maxPosts  // PostCount is the number
+                });
             });
     }
 
@@ -58,7 +68,10 @@ export class PostsService {
                     imagePath: responseData.post.imagePath
                 };
                 this.posts.push(newPost);
-                this.postsUpdated.next([...this.posts]);
+                this.postsUpdated.next({
+                    posts: [...this.posts], // Ensure the correct structure is passed
+                    postCount: this.posts.length  // Optionally update the count
+                });
             }, (error) => {
                 console.error("Error creating post:", error);
             });
@@ -66,7 +79,7 @@ export class PostsService {
 
     updatePost(id: string, title: string, content: string, image?: File | string) {
         let postData: FormData | Post;
-    
+
         if (typeof image === "object") {  // If a new file is uploaded
             postData = new FormData();
             postData.append("id", id);
@@ -76,7 +89,7 @@ export class PostsService {
         } else {  // If only text is updated (image is a string path)
             postData = { id, title, content, imagePath: image || '' };
         }
-    
+
         this.http.put(`http://localhost:3000/api/posts/${id}`, postData)
             .subscribe(response => {
                 console.log('Post updated:', response);
@@ -88,21 +101,18 @@ export class PostsService {
                     content, 
                     imagePath: (response as any).imagePath || image 
                 };
-    
+
                 this.posts = updatedPosts;
-                this.postsUpdated.next([...this.posts]);
+                this.postsUpdated.next({
+                    posts: [...this.posts], // Correct structure passed
+                    postCount: this.posts.length  // Ensure updated post count
+                });
             }, (error) => {
                 console.error("Error updating post:", error);
             });
-    }    
-    deletePost(postId: string) {
-        this.http.delete(`http://localhost:3000/api/posts/${postId}`)
-            .subscribe(() => {
-                console.log('Post deleted');
-                this.posts = this.posts.filter(post => post.id !== postId);
-                this.postsUpdated.next([...this.posts]);
-            }, (error) => {
-                console.error("Error deleting post:", error);
-            });
+    }
+
+    deletePost(postId: string): Observable<any> {
+        return this.http.delete(`http://localhost:3000/api/posts/${postId}`);
     }
 }

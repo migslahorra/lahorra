@@ -17,6 +17,7 @@ import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
+import {MatPaginatorModule} from '@angular/material/paginator';  
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { CommonModule } from '@angular/common';
     MatToolbarModule,
     MatCardModule,
     HttpClientModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -55,9 +55,33 @@ router.post("/", upload.single("image"), async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
+    const pageSize = parseInt(req.query.pagesize, 10);  
+    const currentPage = parseInt(req.query.currentpage, 10);
+    
+    if (!pageSize || !currentPage) {
+        return res.status(400).json({ message: "Page size and current page are required" });
+    }
+
     try {
-        const posts = await Post.find();
-        res.status(200).json({ message: "Posts fetched successfully", posts });
+        // Initialize the query for posts
+        const postquery = Post.find();
+
+        // Apply pagination
+        postquery.skip(pageSize * (currentPage - 1))
+                 .limit(pageSize);
+
+        // Get posts based on pagination
+        const documents = await postquery;
+
+        // Get the total count of posts
+        const count = await Post.countDocuments();
+
+        // Send response
+        res.status(200).json({
+            message: "Posts fetched successfully",
+            posts: documents,
+            maxPosts: count
+        });
     } catch (error) {
         res.status(500).json({ message: "Internal Server Error" });
     }

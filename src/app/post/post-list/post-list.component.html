@@ -36,3 +36,6 @@
     </mat-accordion>
     <p *ngIf="posts.length <= 0">No post added yet</p>
 </mat-card>
+
+<mat-paginator [length]="totalposts" [pageSize]= "postperpage" [pageSizeOptions]= "pageSizeOption" (page)= "onChangedPage($event)">  
+</mat-paginator>  
