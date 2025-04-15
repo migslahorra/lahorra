@@ -1,16 +1,17 @@
 <mat-card class="margintop">
-    <mat-accordion class="margintop" multi="true" *ngIf="posts.length > 0">
-      <mat-expansion-panel *ngFor="let post of posts">
-        <mat-expansion-panel-header>
-          <ng-container *ngIf="editedPostId !== post.id; else editTitle">
-            {{ post.title }}
-          </ng-container>
-          <ng-template #editTitle>
-            <input matInput [(ngModel)]="editablePost.title" (keydown.space)="$event.stopPropagation()">
-          </ng-template>
-        </mat-expansion-panel-header>
-        
-        <div class="image-container">
+  <mat-accordion class="margintop" multi="true" *ngIf="posts.length > 0">
+    <mat-expansion-panel *ngFor="let post of posts">
+      <mat-expansion-panel-header>
+        <ng-container *ngIf="editedPostId !== post.id; else editTitle">
+          {{ post.title }}
+        </ng-container>
+        <ng-template #editTitle>
+          <input matInput [(ngModel)]="editablePost.title" (keydown.space)="$event.stopPropagation()">
+        </ng-template>
+      </mat-expansion-panel-header>
+      
+      <div class="image-container">
+        <mat-action-row *ngIf="userIsAuthenticated">
           <ng-container *ngIf="editedPostId !== post.id; else editImage">
             <img [src]="post.imagePath" alt="Post Image" class="post-image">
           </ng-container>
@@ -18,24 +19,29 @@
             <input type="file" (change)="onImagePicked($event)">
             <img *ngIf="imagePreview" [src]="imagePreview" alt="Selected Image" class="post-image">
           </ng-template>
-        </div>
-  
-        <ng-container *ngIf="editedPostId !== post.id; else editContent">
-          <p>{{ post.content }}</p>
-        </ng-container>
-        <ng-template #editContent>
-          <textarea matInput rows="4" [(ngModel)]="editablePost.content" (keydown.space)="$event.stopPropagation()"></textarea>
-        </ng-template>
-  
-        <mat-action-row>
-          <button mat-button color="primary" (click)="onEdit(post)">Edit</button>
-          <button mat-button color="accent" *ngIf="editedPostId === post.id" (click)="onSaveEdit(post.id)">Save</button>
-          <button mat-button color="warn" (click)="onDelete(post.id)">Delete</button>
         </mat-action-row>
-      </mat-expansion-panel>
-    </mat-accordion>
-    <p *ngIf="posts.length <= 0">No post added yet</p>
+      </div> <!-- ✅ Moved the closing tag here -->
+
+      <ng-container *ngIf="editedPostId !== post.id; else editContent">
+        <p>{{ post.content }}</p>
+      </ng-container>
+      <ng-template #editContent>
+        <textarea matInput rows="4" [(ngModel)]="editablePost.content" (keydown.space)="$event.stopPropagation()"></textarea>
+      </ng-template>
+
+      <mat-action-row>
+        <button mat-button color="primary" (click)="onEdit(post)">Edit</button>
+        <button mat-button color="accent" *ngIf="editedPostId === post.id" (click)="onSaveEdit(post.id)">Save</button>
+        <button mat-button color="warn" (click)="onDelete(post.id)">Delete</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <p *ngIf="posts.length <= 0">No post added yet</p>
 </mat-card>
 
-<mat-paginator [length]="totalposts" [pageSize]= "postperpage" [pageSizeOptions]= "pageSizeOption" (page)= "onChangedPage($event)">  
-</mat-paginator>  
+<mat-paginator 
+  [length]="totalposts" 
+  [pageSize]="postperpage" 
+  [pageSizeOptions]="pageSizeOption" 
+  (page)="onChangedPage($event)">
+</mat-paginator>

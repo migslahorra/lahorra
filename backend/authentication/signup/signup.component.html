@@ -1,0 +1,43 @@
+<mat-card class="signup-card">
+    <form (ngSubmit)="onSignup(signupForm)" #signupForm="ngForm">
+  
+      <!-- Email Input Field -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput 
+               name="email" 
+               ngModel 
+               type="email" 
+               required 
+               email 
+               #emailInput="ngModel" />
+        <mat-error *ngIf="emailInput.invalid && emailInput.touched">
+          Please enter a valid email
+        </mat-error>
+      </mat-form-field>
+  
+      <!-- Password Input Field -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput 
+               name="password" 
+               ngModel 
+               type="password" 
+               required 
+               minlength="6" 
+               #passwordInput="ngModel" />
+        <mat-error *ngIf="passwordInput.invalid && passwordInput.touched">
+          Password must be at least 6 characters
+        </mat-error>
+      </mat-form-field>
+  
+      <!-- Sign Up Button -->
+      <button mat-raised-button color="primary" 
+              type="submit" 
+              [disabled]="signupForm.invalid">
+        Sign Up
+      </button>
+  
+    </form>
+  </mat-card>
+  

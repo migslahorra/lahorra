@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,14 +17,18 @@ import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
-import {MatPaginatorModule} from '@angular/material/paginator';  
-
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { logincomponent } from 'backend/authentication/login/login.component';
+import { signupcomponent } from 'backend/authentication/signup/signup.component';
+import { AuthInterceptor } from 'backend/authentication/auth-interceptor';
 @NgModule({
   declarations: [
     AppComponent,
     PostCreateComponent,
     HeaderComponent,
     PostListComponent,
+    logincomponent,
+    signupcomponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +45,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     HttpClientModule,
     MatPaginatorModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [{provide: HTTP_INTERCEPTORS,   
+    useClass:AuthInterceptor, multi: true}],  
+  bootstrap: [AppComponent],
+  
 })
 export class AppModule { }

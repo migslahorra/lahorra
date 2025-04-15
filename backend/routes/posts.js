@@ -3,6 +3,7 @@ const Post = require('../models/post');
 const multer = require("multer");
 
 const router = express.Router();
+const checkAuth = require("../middleware/check-auth");  
 
 const MIME_TYPE_MAP = {
     'image/png': 'png',
@@ -25,7 +26,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-router.post("/", upload.single("image"), async (req, res) => {
+router.post("/", checkAuth, upload.single("image"), async (req, res) => {
     try {
         if (!req.file) {
             return res.status(400).json({ message: "No image uploaded" });
@@ -63,20 +64,15 @@ router.get("/", async (req, res) => {
     }
 
     try {
-        // Initialize the query for posts
         const postquery = Post.find();
 
-        // Apply pagination
         postquery.skip(pageSize * (currentPage - 1))
                  .limit(pageSize);
 
-        // Get posts based on pagination
         const documents = await postquery;
 
-        // Get the total count of posts
         const count = await Post.countDocuments();
 
-        // Send response
         res.status(200).json({
             message: "Posts fetched successfully",
             posts: documents,
@@ -99,7 +95,7 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-router.put("/:id", upload.single("image"), (req, res, next) => {
+router.put("/:id", checkAuth, upload.single("image"), (req, res, next) => {
     let imagePath = req.body.imagePath;
 
     if (req.file) {
@@ -123,7 +119,7 @@ router.put("/:id", upload.single("image"), (req, res, next) => {
     });
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", checkAuth, async (req, res) => {
     try {
         const deletedPost = await Post.findByIdAndDelete(req.params.id);
         if (!deletedPost) {
